@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quest3 中文输入（拼音）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 20px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            resize: vertical;
+            font-family: inherit;
+            background-color: #fff;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+
+        #result {
+            min-height: 120px;
+            font-size: 22px;
+            line-height: 1.8;
+        }
+
+        #pinyin {
+            min-height: 60px;
+            font-size: 20px;
+        }
+
+        #candidates {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            min-height: 50px;
+        }
+
+        .candidate {
+            padding: 12px 20px;
+            font-size: 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            min-height: 50px;
+        }
+
+        .candidate:hover {
+            background-color: #357abd;
+        }
+
+        .candidate:active {
+            background-color: #2a5f8f;
+        }
+
+        #copyBtn {
+            width: 100%;
+            padding: 15px;
+            font-size: 22px;
+            font-weight: 600;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+            min-height: 60px;
+        }
+
+        #copyBtn:hover {
+            background-color: #229954;
+        }
+
+        #copyBtn:active {
+            background-color: #1e8449;
+        }
+
+        #copyBtn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        #status {
+            margin-top: 15px;
+            padding: 12px;
+            font-size: 18px;
+            text-align: center;
+            border-radius: 6px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-info {
+            background-color: #e8f4f8;
+            color: #2980b9;
+        }
+
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quest3 中文输入（拼音）</h1>
+
+    <div class="section">
+        <label for="result">输出文本（可复制）：</label>
+        <textarea id="result" readonly placeholder="已确认的汉字将显示在这里..."></textarea>
+    </div>
+
+    <div class="section">
+        <label for="pinyin">拼音输入（不带声调）：</label>
+        <textarea id="pinyin" placeholder="在此输入拼音，例如：nihao"></textarea>
+    </div>
+
+    <div class="section">
+        <div id="candidates"></div>
+    </div>
+
+    <div class="section">
+        <button id="copyBtn">复制到剪贴板</button>
+        <div id="status"></div>
+    </div>
+
+    <script src="dist/ime_engine.bundle.js"></script>
+    <script src="ime.js"></script>
+</body>
+</html>
+
